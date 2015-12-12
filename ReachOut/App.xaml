@@ -6,6 +6,7 @@
 
     <Application.Resources>
         <ResourceDictionary>
+            <SolidColorBrush x:Key="AlternateBackgroundBrush" Color="#FF303040"></SolidColorBrush>
         </ResourceDictionary>
     </Application.Resources>
     

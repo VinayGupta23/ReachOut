@@ -22,6 +22,7 @@ namespace ReachOut
     /// </summary>
     public sealed partial class FeedPage : Page, IManageable
     {
+
         public FeedPage()
         {
             this.InitializeComponent();

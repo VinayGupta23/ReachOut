@@ -17,16 +17,18 @@
         <Border>
             <StackPanel>
                 <TextBlock Text="ELECTRICITY BOARD" Style="{StaticResource TitleTextBlockStyle}"></TextBlock>
-                <TextBlock Text="complaints" Style="{StaticResource HeaderTextBlockStyle}"></TextBlock>
+                <TextBlock Text="complaints" Style="{StaticResource HeaderTextBlockStyle}" FontSize="42"></TextBlock>
             </StackPanel>
         </Border>
 
         <Border Grid.Row="1" Padding="10" Margin="0,20,0,0"
-                VerticalAlignment="Top" Background="#FF303040">
+                VerticalAlignment="Top" Background="{StaticResource AlternateBackgroundBrush}">
             <StackPanel>
                 <TextBlock Text="TRANSFORMER BURST" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}"></TextBlock>
                 <StackPanel Orientation="Horizontal" Margin="0,5,0,10">
-                    <SymbolIcon Symbol="MapPin" Margin="0,2,5,0"></SymbolIcon>
+                    <Viewbox Stretch="Uniform" Height="30" Margin="0,0,10,0">
+                        <Image Source="ms-appx:///Assets/Icons/mapmark.png"></Image>
+                    </Viewbox>
                     <TextBlock Text="3rd crossing, Ormes Road, Kilpauk" VerticalAlignment="Center"
                                Foreground="RosyBrown" Style="{StaticResource BodyTextBlockStyle}"></TextBlock>
                 </StackPanel>
@@ -44,6 +46,7 @@
                     Date Stamp<LineBreak></LineBreak><Run Foreground="White">Dec 11, 10:30 am</Run>
                     </TextBlock>
                 </Grid>
+                
             </StackPanel>
         </Border>
         
