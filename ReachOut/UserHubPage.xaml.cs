@@ -81,7 +81,7 @@ namespace ReachOut
             return null;
         }
 
-        public async void LoadState(Dictionary<string, object> lastState)
+        public void LoadState(Dictionary<string, object> lastState)
         {
         }
 

@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using Parse;
 using ReachOut.Managers;
+using ReachOut.DataModel;
 
 
 namespace ReachOut
@@ -43,6 +44,9 @@ namespace ReachOut
             this.Suspending += this.OnSuspending;
             this.Resuming += App_Resuming;
 
+            ParseObject.RegisterSubclass<Authorizer>();
+            ParseObject.RegisterSubclass<Complaint>();
+            ParseObject.RegisterSubclass<User>();
             ParseClient.Initialize("cgGKIVOaROQf75uq7KJ1kuZk9kVkSVgamwdV8jiS", "vM2951gFNKofge715Noi3YlZFhSmcDU9OUmxuIoX");
         }
 
@@ -93,7 +97,7 @@ namespace ReachOut
                 rootFrame.Navigated += this.RootFrame_FirstNavigated;
 
                 // Navigate to desired page
-                PageManager.NavigateTo(typeof(FeedPage), null, NavigationType.FreshStart);
+                PageManager.NavigateTo(typeof(LoginPage), null, NavigationType.FreshStart);
             }
 
             // Ensure the current window is active

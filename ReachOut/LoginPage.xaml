@@ -27,7 +27,7 @@
         <Viewbox Grid.Row="1">
             <StackPanel>
                 <Image Source="ms-appx:///Assets/AppLogo.png" Width="200" Height="200"></Image>
-                <TextBlock Text="VITacademics" Style="{StaticResource HeaderTextBlockStyle}"
+                <TextBlock Text="ReachOut" Style="{StaticResource HeaderTextBlockStyle}"
                            HorizontalAlignment="Center"></TextBlock>
                 </StackPanel>
         </Viewbox>
@@ -38,34 +38,13 @@
                      Grid.Row="4" VerticalAlignment="Top" Margin="-19,0,-19,0"></ProgressBar>
 
         <!-- Input Grid -->
-        <Grid Grid.Row="5" Margin="2,0,2,20">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-
-            <TextBox x:Name="regNoBox" Header="Register Number" Text="{Binding RegNo, Mode=TwoWay}"
-                     Grid.Row="0" IsTextPredictionEnabled="False" Margin="0,0,15,10"
-                     InputScope="Search" KeyDown="RegNoBox_KeyDown"></TextBox>
-            <DatePicker x:Name="datePicker" Header="Date of Birth" Date="{Binding DOB, Mode=TwoWay}"
-                        Grid.Row="0" Grid.Column="1" Margin="15,0,0,0"></DatePicker>
-            <TextBlock Text="Note: Number is not required for chennai students" MaxLines="0" Style="{StaticResource ControlContextualInfoTextBlockStyle}"
-                       Grid.Column="1" Grid.Row="1" Margin="15,0,0,0" VerticalAlignment="Center"></TextBlock>
-            <RadioButton x:Name="radioButton1" Checked="RadioButton_Checked"
-                         Grid.Row="3" Grid.Column="0" Content="Vellore"></RadioButton>
-            <RadioButton x:Name="radioButton2" Checked="RadioButton_Checked"
-                         Grid.Row="3" Grid.Column="1" Content="Chennai"></RadioButton>
-            <TextBox x:Name="phoneNoBox" Header="Parent's number" Text="{Binding PhoneNo, Mode=TwoWay}"
-                     Grid.Row="1" Margin="0,0,15,0" Grid.Column="0" InputScope="TelephoneNumber"></TextBox>
-            <Button x:Name="loginButton" Content="Login" Click="LoginButton_Click"
-                    Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"></Button>
-        </Grid>
+        <StackPanel Grid.Row="5" Margin="2,0,2,20">
+            <TextBox x:Name="emailBox" Header="Email" Text="{Binding Email, Mode=TwoWay}"
+                     Margin="0,0,0,15" IsTextPredictionEnabled="False"
+                     InputScope="Search" KeyDown="TextBox_KeyDown"></TextBox>
+            <TextBox x:Name="passwordBox" Header="Password" Text="{Binding Password, Mode=TwoWay}"
+                     Margin="0,0,0,15" InputScope="Search" KeyDown="TextBox_KeyDown"></TextBox>
+            <Button x:Name="loginButton" Content="Login" Click="LoginButton_Click" HorizontalAlignment="Center"></Button>
+        </StackPanel>
     </Grid>
 </Page>

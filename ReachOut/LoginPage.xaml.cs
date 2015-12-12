@@ -1,4 +1,6 @@
-﻿using ReachOut.Managers;
+﻿using Parse;
+using ReachOut.DataModel;
+using ReachOut.Managers;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -15,38 +17,28 @@ namespace ReachOut
     /// </summary>
     public sealed partial class LoginPage : Page, IManageable
     {
-        private string _regNo;
-        private string _phoneNo;
+        private string _email;
+        private string _password;
 
-        public string Campus
-        {
-            get;
-            set;
-        }
-        public string RegNo
+        public string Email
         {
             get
-            { return _regNo; }
+            { return _email; }
             set
             {
                 if (value != null)
-                    _regNo = value.ToLower().Trim();
+                    _email = value.ToLower().Trim();
                 UpdateLoginButtonState();
             }
         }
-        public DateTimeOffset DOB
-        {
-            get;
-            set;
-        }
-        public string PhoneNo
+        public string Password
         {
             get
-            { return _phoneNo; }
+            { return _password; }
             set
             {
                 if (value != null)
-                    _phoneNo = value;
+                    _password = value;
                 UpdateLoginButtonState();
             }
         }
@@ -55,10 +47,7 @@ namespace ReachOut
         {
             this.InitializeComponent();
 
-            datePicker.MaxYear = DateTimeOffset.UtcNow.AddYears(-1);
-            datePicker.MinYear = DateTimeOffset.Now.AddYears(-30);
             SetState(true);
-
             this.DataContext = this;
         }
 
@@ -67,52 +56,18 @@ namespace ReachOut
             PageManager.RegisterPage(this);
         }
 
-        private bool IsRegNoValid()
-        {
-            bool valid = false;
-            if (RegNo.Length > 5)
-            {
-                int i;
-                for (i = 0; i < RegNo.Length; i++)
-                {
-                    if (i >= 2 && i <= 4)
-                    {
-                        if (!char.IsLetter(RegNo[i]))
-                            break;
-                    }
-                    else
-                    {
-                        if (!char.IsNumber(RegNo[i]))
-                            break;
-                    }
-                }
-                if (i == RegNo.Length)
-                    valid = true;
-            }
-            return valid;
-        }
-
-        private void RadioButton_Checked(object sender, RoutedEventArgs e)
-        {
-            Campus = ((sender as RadioButton).Content as string).ToLower();
-            UpdateLoginButtonState();
-        }
-
         private void UpdateLoginButtonState()
         {
             loginButton.IsEnabled =
-                Campus != null && RegNo != null;
+                Password != null && Email != null 
+                && Password.Length * Email.Length != 0;
         }
 
         private void SetState(bool isIdle)
         {
-            regNoBox.IsEnabled = isIdle;
-            phoneNoBox.IsEnabled = isIdle;
-            datePicker.IsEnabled = isIdle;
-            radioButton1.IsEnabled = isIdle;
-            radioButton2.IsEnabled = isIdle;
-
-
+            emailBox.IsEnabled = isIdle;
+            passwordBox.IsEnabled = isIdle;
+            
             if (isIdle)
             {
                 progressBar.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
@@ -135,23 +90,31 @@ namespace ReachOut
         { }
 
 
-        private void RegNoBox_KeyDown(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
+        private void TextBox_KeyDown(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
         {
-            if (e.Key == Windows.System.VirtualKey.Enter)
-                datePicker.Focus(FocusState.Programmatic);
         }
-
-
 
         public bool AllowAppExit()
         {
             return true;
         }
 
-        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        private async void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-
+            SetState(false);
+            var query = new ParseQuery<User>().Where((User u) => u.email == Email && u.password == Password);
+            try
+            {
+                var user = await query.FirstAsync();
+                PageManager.NavigateTo(typeof(FeedPage), null, NavigationType.Default);
+            }
+            catch
+            {
+                new MessageDialog("Incorrect password or email combination.", "Invalid Credentials").ShowAsync();
+                SetState(true);
+            }
         }
+
     }
 
 
