@@ -1,0 +1,52 @@
+﻿<Page
+    x:Class="ReachOut.FeedPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ReachOut"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="#FF151515">
+
+    <Grid Margin="19,10,19,20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <Border>
+            <StackPanel>
+                <TextBlock Text="ELECTRICITY BOARD" Style="{StaticResource TitleTextBlockStyle}"></TextBlock>
+                <TextBlock Text="complaints" Style="{StaticResource HeaderTextBlockStyle}"></TextBlock>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="1" Padding="10" Margin="0,20,0,0"
+                VerticalAlignment="Top" Background="#FF303040">
+            <StackPanel>
+                <TextBlock Text="TRANSFORMER BURST" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}"></TextBlock>
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,10">
+                    <SymbolIcon Symbol="MapPin" Margin="0,2,5,0"></SymbolIcon>
+                    <TextBlock Text="3rd crossing, Ormes Road, Kilpauk" VerticalAlignment="Center"
+                               Foreground="RosyBrown" Style="{StaticResource BodyTextBlockStyle}"></TextBlock>
+                </StackPanel>
+                <Grid Margin="0,5,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Style="{StaticResource ControlHeaderTextBlockStyle}" LineStackingStrategy="MaxHeight">
+                    Registrant<LineBreak></LineBreak><Run Foreground="White">Vinay Gupta</Run>
+                    </TextBlock>
+
+                    <TextBlock Grid.Column="1" TextAlignment="Right" Style="{StaticResource ControlHeaderTextBlockStyle}"  LineStackingStrategy="MaxHeight">
+                    Date Stamp<LineBreak></LineBreak><Run Foreground="White">Dec 11, 10:30 am</Run>
+                    </TextBlock>
+                </Grid>
+            </StackPanel>
+        </Border>
+        
+    </Grid>
+    
+</Page>
