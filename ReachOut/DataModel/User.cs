@@ -11,7 +11,7 @@ namespace ReachOut.DataModel
     public class User : ParseObject
     {
         [ParseFieldName("username")]
-        public string username
+        public string userName
         {
             get { return GetProperty<string>(); }
             set { SetProperty<string>(value); }
@@ -34,15 +34,6 @@ namespace ReachOut.DataModel
             get { return GetProperty<string>(); }
             set { SetProperty<string>(value); }
         }
-        [ParseFieldName("meterId")]
-        public string meterId
-        {
-            get { return GetProperty<string>(); }
-            set { SetProperty<string>(value); }
-        }
-
     }
-    
-
-    }
+}
 

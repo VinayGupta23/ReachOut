@@ -1,14 +1,21 @@
 ﻿<Page
-    x:Class="ReachOut.MapPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:ReachOut"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Maps="using:Windows.UI.Xaml.Controls.Maps"
+    x:Class="ReachOut.MapPage"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    
     <Grid>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Text="HEAT MAP" Margin="15,5,0,10" Style="{StaticResource MessageDialogTitleStyle}"></TextBlock>
+        <Maps:MapControl x:Name="mapControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                         Grid.Row="1" MapServiceToken="{StaticResource MapAuthToken}"/>
     </Grid>
 </Page>

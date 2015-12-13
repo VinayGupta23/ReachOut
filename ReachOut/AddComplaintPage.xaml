@@ -1,0 +1,30 @@
+﻿<Page
+    x:Class="ReachOut.AddComplaintPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ReachOut"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.BottomAppBar>
+        <CommandBar>
+            <AppBarButton Label="done" Icon="Accept"
+                          Click="AcceptButton_Click"></AppBarButton>
+            <AppBarButton Label="cancel" Icon="Cancel"
+                          Click="CancelButton_Click"></AppBarButton>
+        </CommandBar>
+    </Page.BottomAppBar>
+
+    <StackPanel Margin="19,10,19,0">
+        <TextBlock Text="new complaint" Style="{StaticResource SubheaderTextBlockStyle}" FontSize="42"></TextBlock>
+        <TextBox Margin="0,30,0,0" Header="Problem" x:Name="titleBox"></TextBox>
+        <ComboBox Header="Category" Margin="0,15,0,0" x:Name="comboBox">
+            <ComboBoxItem>Electricity Board</ComboBoxItem>
+            <ComboBoxItem>Water and sewage</ComboBoxItem>
+        </ComboBox>
+        <TextBox Header="Description" Margin="0,10,0,0" x:Name="descBox"></TextBox>
+    </StackPanel>
+    
+</Page>

@@ -29,6 +29,8 @@ namespace ReachOut
     public sealed partial class App : Application
     {
 
+        public static List<Complaint> ComplaintList { get; set; }
+
         public static readonly ApplicationDataContainer _settings = ApplicationData.Current.LocalSettings;
         public static readonly StorageFolder _folder = ApplicationData.Current.LocalFolder;
 
@@ -99,6 +101,13 @@ namespace ReachOut
                 // Navigate to desired page
                 PageManager.NavigateTo(typeof(LoginPage), null, NavigationType.FreshStart);
             }
+
+            //User u = new User();
+            //u.address = "house";
+            //u.userName = "Vinay Gupta";
+            //u.email = "email@test.com";
+            //u.password = "hackDec";
+            //await u.SaveAsync();
 
             // Ensure the current window is active
             Window.Current.Activate();

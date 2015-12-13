@@ -1,6 +1,7 @@
 ﻿using ReachOut.Managers;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -13,7 +14,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-
+using ReachOut.DataModel;
+using Parse;
 
 namespace ReachOut
 {
@@ -23,9 +25,13 @@ namespace ReachOut
     public sealed partial class FeedPage : Page, IManageable
     {
 
+        public ObservableCollection<Complaint> Complaints
+        { get; set; }
+
         public FeedPage()
         {
             this.InitializeComponent();
+            this.NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Disabled;
         }
 
         /// <summary>
@@ -43,13 +49,39 @@ namespace ReachOut
             return null;
         }
 
-        public void LoadState(Dictionary<string, object> lastState)
+        public async void LoadState(Dictionary<string, object> lastState)
         {
+            loadingScreenPresenter.Visibility = Windows.UI.Xaml.Visibility.Visible;
+
+            try
+            {
+                var query = new ParseQuery<Complaint>().WhereMatches("heatCount","1");
+                IEnumerable<Complaint> list = await query.FindAsync();
+                Complaints = new ObservableCollection<Complaint>(list);
+                App.ComplaintList = list.ToList();
+                this.DataContext = this;
+            }
+            catch
+            {
+                Complaints = new ObservableCollection<Complaint>();
+            }
+
+            loadingScreenPresenter.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
         }
 
         public bool AllowAppExit()
         {
             return true;
+        }
+
+        private void NewButton_Click(object sender, RoutedEventArgs e)
+        {
+            PageManager.NavigateTo(typeof(AddComplaintPage), null, NavigationType.Default);
+        }
+
+        private void AppBarButton_Click(object sender, RoutedEventArgs e)
+        {
+            PageManager.NavigateTo(typeof(MapPage), null, NavigationType.Default);
         }
     }
 }

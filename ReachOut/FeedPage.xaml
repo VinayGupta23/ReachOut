@@ -6,49 +6,79 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="#FF151515">
+    Background="{StaticResource DarkBackgroundBrush}">
 
+    <Page.BottomAppBar>
+        <CommandBar>
+            <AppBarButton Icon="Add" Label="new"
+                          Click="NewButton_Click"></AppBarButton>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Label="admin portal" Click="AppBarButton_Click"></AppBarButton>
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+    
     <Grid Margin="19,10,19,20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        
-        <Border>
+
+        <ContentPresenter Grid.Row="1" x:Name="loadingScreenPresenter" HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel>
-                <TextBlock Text="ELECTRICITY BOARD" Style="{StaticResource TitleTextBlockStyle}"></TextBlock>
-                <TextBlock Text="complaints" Style="{StaticResource HeaderTextBlockStyle}" FontSize="42"></TextBlock>
+                <ProgressRing IsActive="True" Margin="0,0,0,5" Background="{StaticResource DarkBackgroundBrush}">
+                </ProgressRing>
+                <TextBlock Text="Loading" Style="{StaticResource SubheaderTextBlockStyle}"></TextBlock>
+            </StackPanel>
+        </ContentPresenter>
+
+        <Border Grid.Row="0">
+            <StackPanel>
+                <TextBlock Text="REACHOUT" Style="{StaticResource TitleTextBlockStyle}"></TextBlock>
+                <TextBlock Text="my complaints" Style="{StaticResource HeaderTextBlockStyle}" FontSize="42"></TextBlock>
             </StackPanel>
         </Border>
 
-        <Border Grid.Row="1" Padding="10" Margin="0,20,0,0"
-                VerticalAlignment="Top" Background="{StaticResource AlternateBackgroundBrush}">
-            <StackPanel>
-                <TextBlock Text="TRANSFORMER BURST" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}"></TextBlock>
-                <StackPanel Orientation="Horizontal" Margin="0,5,0,10">
-                    <Viewbox Stretch="Uniform" Height="30" Margin="0,0,10,0">
-                        <Image Source="ms-appx:///Assets/Icons/mapmark.png"></Image>
-                    </Viewbox>
-                    <TextBlock Text="3rd crossing, Ormes Road, Kilpauk" VerticalAlignment="Center"
+        <ListView Grid.Row="1" ItemsSource="{Binding Complaints}" Margin="0,10,0,0">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border Padding="10,5,10,10" Margin="0,15,0,10" HorizontalAlignment="Stretch" Background="{StaticResource AlternateBackgroundBrush}">
+                        <StackPanel>
+                            <TextBlock Text="{Binding category}" Typography.Capitals="AllSmallCaps"
+                                       Style="{StaticResource GroupHeaderTextBlockStyle}"></TextBlock>
+                            <TextBlock Text="{Binding title}" Style="{StaticResource MessageDialogTitleStyle}"></TextBlock>
+                            <StackPanel Orientation="Horizontal">
+                                <!--<Viewbox Stretch="Uniform" Height="30" Margin="0,0,10,0">
+                                    <Image Source="ms-appx:///Assets/Icons/mapmark.png"></Image>
+                                </Viewbox>-->
+                                <TextBlock Text="{Binding description}" VerticalAlignment="Center"
                                Foreground="RosyBrown" Style="{StaticResource BodyTextBlockStyle}"></TextBlock>
-                </StackPanel>
-                <Grid Margin="0,5,0,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
+                            </StackPanel>
+                            <Grid Margin="0,10,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
 
-                    <TextBlock Style="{StaticResource ControlHeaderTextBlockStyle}" LineStackingStrategy="MaxHeight">
-                    Registrant<LineBreak></LineBreak><Run Foreground="White">Vinay Gupta</Run>
-                    </TextBlock>
-
-                    <TextBlock Grid.Column="1" TextAlignment="Right" Style="{StaticResource ControlHeaderTextBlockStyle}"  LineStackingStrategy="MaxHeight">
-                    Date Stamp<LineBreak></LineBreak><Run Foreground="White">Dec 11, 10:30 am</Run>
-                    </TextBlock>
-                </Grid>
-                
-            </StackPanel>
-        </Border>
+                                <TextBlock Style="{StaticResource ControlHeaderTextBlockStyle}" LineStackingStrategy="MaxHeight">
+                                    Status<LineBreak></LineBreak>
+                                    <Run Foreground="White" Text="{Binding status}"></Run>
+                                </TextBlock>
+                                <TextBlock Grid.Column="1" TextAlignment="Right" Style="{StaticResource ControlHeaderTextBlockStyle}"  LineStackingStrategy="MaxHeight">
+                                    Date<LineBreak></LineBreak>
+                                    <Run Foreground="White" Text="{Binding CreatedAt, Converter={StaticResource dateToStringConverter}}"></Run>
+                                </TextBlock>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
         
     </Grid>
     

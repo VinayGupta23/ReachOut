@@ -7,6 +7,15 @@
     <Application.Resources>
         <ResourceDictionary>
             <SolidColorBrush x:Key="AlternateBackgroundBrush" Color="#FF303040"></SolidColorBrush>
+            <SolidColorBrush x:Key="DarkBackgroundBrush" Color="#FF151515"></SolidColorBrush>
+            <x:String x:Key="MapServiceId">
+                73648d8e-9711-4d41-b3e0-a2db75b06e80
+            </x:String>
+            <x:String x:Key="MapAuthToken">
+                Cd6KEUtGGwTa7OYpYnDUVg
+            </x:String>
+            <local:DateToStringConverter x:Key="dateToStringConverter"></local:DateToStringConverter>
+            <local:LocationToStringConverter x:Key="locToStringConverter"></local:LocationToStringConverter>
         </ResourceDictionary>
     </Application.Resources>
     

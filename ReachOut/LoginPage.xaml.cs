@@ -31,7 +31,7 @@ namespace ReachOut
                 UpdateLoginButtonState();
             }
         }
-        public string Password
+        public string UserPassword
         {
             get
             { return _password; }
@@ -59,8 +59,8 @@ namespace ReachOut
         private void UpdateLoginButtonState()
         {
             loginButton.IsEnabled =
-                Password != null && Email != null 
-                && Password.Length * Email.Length != 0;
+                UserPassword != null && Email != null 
+                && UserPassword.Length * Email.Length != 0;
         }
 
         private void SetState(bool isIdle)
@@ -102,7 +102,7 @@ namespace ReachOut
         private async void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             SetState(false);
-            var query = new ParseQuery<User>().Where((User u) => u.email == Email && u.password == Password);
+            var query = new ParseQuery<User>().Where((User u) => u.email == Email && u.password == UserPassword);
             try
             {
                 var user = await query.FirstAsync();

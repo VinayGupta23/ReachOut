@@ -14,7 +14,6 @@ using Windows.UI.Popups;
 using System.Text;
 using System.Linq;
 using ReachOut.Managers;
-using ReachOut.UIControls;
 
 namespace ReachOut
 {
@@ -23,7 +22,6 @@ namespace ReachOut
     {
 
         private StatusBar _statusBar;
-        private MenuControl _menu;
         private bool _isMenuOpen;
         private bool _isIdle;
         private bool _isContentAvailable;
@@ -63,8 +61,6 @@ namespace ReachOut
             this.DataContext = this;
             this.NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
 
-            _menu = new MenuControl();
-
             _statusBar = StatusBar.GetForCurrentView();
             _statusBar.BackgroundColor = (Application.Current.Resources["AlternateDarkBrush"] as SolidColorBrush).Color;
             _statusBar.ForegroundColor = Colors.LightGray;
@@ -99,8 +95,7 @@ namespace ReachOut
         {
             if (IsMenuOpen)
                 menuPresenter.Content = null;
-            else
-                menuPresenter.Content = _menu;
+            else ;
             IsMenuOpen = !IsMenuOpen;
         }
 
